@@ -74,3 +74,21 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+# bloop and metals
+.bloop
+.bsp
+
+# sbt
+project/project/
+project/target/
+target/
+
+# intellij idea
+*.iml
+*.ipr
+.idea
+
+# other?
+.history
+.scala_dependencies
+.cache-main
