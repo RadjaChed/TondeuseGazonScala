@@ -1,10 +1,18 @@
 package TondeuseGazon
-import TondeuseGazon.Commandes
-import TondeuseGazon.Commandes.{A, D, G,commande}
-import TondeuseGazon.PositionCardinale.{E, N, S, W, positionCardinale}
+import TondeuseGazon.Commandes.{A, D, G, commande, toCommande}
+import TondeuseGazon.PositionCardinale.{E, N, S, W, positionCardinale, toPC}
 
 class Execution {
 
+  def tondeuseInit(lines: List[String], listTondeuse: List[TondeuseInit], pelouse: Pelouse): List[TondeuseInit] =
+    lines match {
+      case Nil => listTondeuse
+      case pos :: inst :: rest =>
+        val position = Position(pos(0), pos(1), toPC(pos(2)))
+        val instructions = inst.toList.map(c => toCommande(c))
+        val newTondeuseInit = List(TondeuseInit(pelouse, position, instructions))
+        tondeuseInit(rest, listTondeuse ::: newTondeuseInit, pelouse)
+    }
   def droite(pc: positionCardinale): positionCardinale = pc match {
     case W => N
     case N => E
@@ -45,7 +53,11 @@ class Execution {
         println(f"A:$actions")
         println(position)
         val finalPosition = avancer(position)
-        if (finalPosition.x <= pelouse.x && finalPosition.y <= pelouse.y) execution(rest, finalPosition, pelouse)
+        if ( 0 <= finalPosition.x
+          && finalPosition.x <= pelouse.x
+          && 0<= finalPosition.y
+          && finalPosition.y <= pelouse.y)
+            execution(rest, finalPosition, pelouse)
         else execution(rest, position, pelouse)
     }
 
