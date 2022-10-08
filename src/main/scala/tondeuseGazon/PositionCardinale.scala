@@ -9,5 +9,6 @@ object PositionCardinale extends Enumeration {
     case "E" => E
     case "W" => W
     case "S" => S
+    case _ => throw new Exception(s"wrong cardinal position: $c")
   }
 }

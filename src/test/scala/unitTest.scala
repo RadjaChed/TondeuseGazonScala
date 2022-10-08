@@ -1,7 +1,7 @@
 package tondeuseGazon
-import Commandes.toCommande
+import Instruction.toInstruction
 import org.scalatest.funsuite.AnyFunSuite
-import Commandes.{G,D,A}
+import Instruction.{G,D,A}
 import PositionCardinale.{E, N, S, W}
 import scala.io.Source
 
@@ -34,7 +34,7 @@ test("check execution"){
   val pelouse = Pelouse(5,5)
   val initPosition = Position(1,2,N)
   val actions = "GAGAGAGAA"
-  val listActions = actions.toList.map(c => toCommande(c.toString))
+  val listActions = actions.toList.map(c => toInstruction(c.toString))
   val finalPosition = Execution.execution(listActions,initPosition,pelouse)
   assertResult(Position(1,3,N))(finalPosition)
 }
