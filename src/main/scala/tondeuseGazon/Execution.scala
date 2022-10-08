@@ -1,18 +1,21 @@
-package TondeuseGazon
-import TondeuseGazon.Commandes.{A, D, G, commande, toCommande}
-import TondeuseGazon.PositionCardinale.{E, N, S, W, positionCardinale, toPC}
+package tondeuseGazon
 
-class Execution {
+import tondeuseGazon.Commandes.{G,D,A, commande, toCommande}
+import tondeuseGazon.PositionCardinale.{E, N, S, W, positionCardinale, toPC}
 
-  def tondeuseInit(lines: List[String], listTondeuse: List[TondeuseInit], pelouse: Pelouse): List[TondeuseInit] =
+object Execution {
+
+  def tondeuseInit(lines: List[String], pelouse: Pelouse, listTondeuseInit: List[TondeuseInit] = List()): List[TondeuseInit] =
     lines match {
-      case Nil => listTondeuse
+      case Nil => listTondeuseInit
       case pos :: inst :: rest =>
-        val position = Position(pos(0), pos(1), toPC(pos(2)))
-        val instructions = inst.toList.map(c => toCommande(c))
+        val p = pos.split("\\s+") // Split in white spaces
+        val position = Position(p(0).toInt, p(1).toInt, toPC(p(2)))
+        val instructions = inst.toList.map(c => toCommande(c.toString))
         val newTondeuseInit = List(TondeuseInit(pelouse, position, instructions))
-        tondeuseInit(rest, listTondeuse ::: newTondeuseInit, pelouse)
+        tondeuseInit(rest, pelouse, listTondeuseInit ::: newTondeuseInit)
     }
+
   def droite(pc: positionCardinale): positionCardinale = pc match {
     case W => N
     case N => E
@@ -34,35 +37,28 @@ class Execution {
     case N => Position(position.x, position.y + 1, position.pc)
   }
 
-  def execution(actions:List[commande], position:Position, pelouse: Pelouse):Position = actions match {
+  def execution(actions: List[commande], position: Position, pelouse: Pelouse): Position = actions match {
     case Nil =>
-      println(f"Nil:$actions")
+      println(position)
       position
-    case action :: rest => action match{
+    case action :: rest => action match {
       case G =>
-        println(f"G:$actions")
-        println(position)
         val newPosition = Position(position.x, position.y, gauche(position.pc))
         execution(rest, newPosition, pelouse)
       case D =>
-        println(f"D:$actions")
-        println(position)
         val newPosition = Position(position.x, position.y, droite(position.pc))
         execution(rest, newPosition, pelouse)
       case A =>
-        println(f"A:$actions")
-        println(position)
         val finalPosition = avancer(position)
-        if ( 0 <= finalPosition.x
+        if (0 <= finalPosition.x
           && finalPosition.x <= pelouse.x
-          && 0<= finalPosition.y
+          && 0 <= finalPosition.y
           && finalPosition.y <= pelouse.y)
-            execution(rest, finalPosition, pelouse)
+          execution(rest, finalPosition, pelouse)
         else execution(rest, position, pelouse)
     }
 
   }
-
 
 
 }

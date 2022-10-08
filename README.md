@@ -4,7 +4,9 @@ La société MowItNow a décidé de développer une tondeuse à gazon automatiqu
 destinée aux surfaces rectangulaires.
 La tondeuse peut être programmée pour parcourir l'intégralité de la surface. La position de
 la tondeuse est représentée par une combinaison de coordonnées (x,y) et d'une lettre
-indiquant l'orientation selon la notation cardinale anglaise (N,E,W,S). La pelouse est
+indiquant l'orientation selon la notation cardinale anglaise (N,E,W,S). 
+
+La pelouse est
 divisée en grilles pour simplifier la navigation.
 Par exemple, la position de la tondeuse peut être « 0, 0, N », ce qui signifie qu'elle se
 situe dans le coin inférieur gauche de la pelouse, et orientée vers le Nord.
@@ -18,9 +20,9 @@ conserve son orientation et traite la commande suivante.
 On assume que la case directement au Nord de la position (x, y) a pour coordonnées (x,
 y+1).
 Pour programmer la tondeuse, on lui fournit un fichier d'entrée construit comme suit :
-• La première ligne correspond aux coordonnées du coin supérieur droit de la pelouse,
+- La première ligne correspond aux coordonnées du coin supérieur droit de la pelouse,
 celles du coin inférieur gauche sont supposées être (0,0).
-• La suite du fichier permet de piloter toutes les tondeuses qui ont été déployées.
+- La suite du fichier permet de piloter toutes les tondeuses qui ont été déployées.
 Chaque tondeuse a deux lignes la concernant :
 - la première ligne donne la position initiale de la tondeuse, ainsi que son
   orientation. La position et l'orientation sont fournies sous la forme de 2 chiffres
@@ -32,7 +34,6 @@ Chaque tondeuse se déplace de façon séquentielle, ce qui signifie que la seco
 tondeuse ne bouge que lorsque la première a exécuté intégralement sa série
 d'instructions.
 Lorsqu'une tondeuse achève une série d'instructions, elle communique sa position et son
-
 orientation.
 
 ## **OBJECTIF**
@@ -40,11 +41,19 @@ Concevoir et écrire un programme en Scala, implémentant la spécification ci-d
 passant le test ci-après.
 ## **TEST**
 Le fichier suivant est fourni en entrée :
+
 5 5
+
 1 2 N
+
 GAGAGAGAA
+
 3 3 E
+
 AADAADADDA
+
 On attend le résultat suivant (position finale des tondeuses) :
+
 Tondeuse 1 : 1 3 N
+
 Tondeuse 2 : 5 1 E
