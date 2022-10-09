@@ -6,6 +6,7 @@ import PositionCardinale.{E, N, S, W}
 import scala.io.Source
 
 class unitTest extends AnyFunSuite {
+  // tests unitaires sur chaque fonction
   test("check tondeuse initiation") {
     val filename = "src/main/Resources/instructions.txt"
     val lines = Source.fromFile(filename).getLines.toList
