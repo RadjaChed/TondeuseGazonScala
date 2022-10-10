@@ -7,7 +7,7 @@ object Execution {
 
   def tondeuseInit(lines: List[String], pelouse: Pelouse, listTondeuseInit: List[TondeuseInit] = List()): List[TondeuseInit] = {
     /*
-    la fonction retourne l'état initial de chauqye tondeuse dans une liste TondeuseInit
+    la fonction retourne l'état initial de chauque tondeuse dans une liste TondeuseInit
     lines: List [String] => position de la tondeuse et les instructions à suivre
     pelouse: Pelouse =>  dimensions de la pelouse
     listTondeuseInit: List[TondeuseInit] => liste de tondeuses initialisées (positions et instructions de chaque tondeuse)
